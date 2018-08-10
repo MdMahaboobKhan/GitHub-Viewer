@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+
+    <meta charset="utf-8" />
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/script.js"></script>
+    <style>
+
+       
+        body{
+            background-color: whitesmoke ;
+        }
+
+        h1 {
+            font-size: 40px;
+            font-family: "Times New Roman", Times, serif;
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        h2 {
+            font-size: 20px;
+            font-family: "Times New Roman", Times, serif;
+            font-style: italic;
+        }
+
+        tr:nth-child(even) {
+            background-color: #ffffcc;
+        }
+
+        input[type=text] {
+            background-color: lightcyan;
+            color: darkgray;
+        }
+
+    </style>
+    <title>Demo</title>
+</head>
+<body ng-controller="mainController" ng-init="startCount();">
+    <center>
+        <h1> {{message}} </h1>
+
+        <div>
+            {{error}}
+        </div>
+        
+        {{ countdown }}
+        <form name="searchUser " ng-submit="search(username)">
+            <input type="text" placeholder="username" ng-model="username" required />
+            <input type="submit" value="search" />
+        </form>
+        <div ng-show="user" id="showEle">
+            <h2> User Login: {{user.login}}</h2>
+            <h2> User: {{user.name}} </h2>
+            <h3> Blog: {{user.blog}}</h3>
+            ORDER:
+            <select ng-model="repoSort">
+                <option value="+name">Name</option>
+                <option value="-satrgazers_count">Stars</option>
+                <option value="+language">language</option>
+            </select><br /><br />
+        </div>
+    </center>
+    <center>
+        <table ng-hide="!user" >
+            <thead bgcolor ="aliceblue">
+                <tr>
+                    <th>Name</th>
+                    <th>Star</th>
+                    <th>Language</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="repo in repos | orderBy:repoSort">
+                    <th>{{repo.name}}</th>
+                    <th>{{repo.stargazers_count | number}}</th>
+                    <th>{{repo.language}}</th>
+                </tr>
+            </tbody>
+        </table>
+    </center>
+</body>
+</html>
